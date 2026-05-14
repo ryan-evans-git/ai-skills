@@ -52,6 +52,11 @@ docs/
 │   ├── naming.md
 │   ├── typing.md
 │   └── linting.md
+├── performance/           ← perf budgets, investigations, load tests, DB tuning (owned by performance/*)
+│   ├── budgets.md
+│   ├── investigations/
+│   ├── load-tests/
+│   └── db/
 └── onboarding.md          ← getting-started doc (owned by onboarding-walkthrough)
 ```
 

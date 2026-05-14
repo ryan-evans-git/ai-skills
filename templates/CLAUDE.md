@@ -81,6 +81,14 @@ docs/
 - **Threat model** for any new auth flow, integration, or sensitive feature. (skill: threat-model)
 - **Diff-level security review** before merging anything that touches user input, auth, or external calls. (skill: security-review)
 
+### Performance defaults
+
+- **Budgets are numbers, not adjectives.** Committed budgets live in `docs/performance/budgets.md` and are enforced in CI. (skill: performance-budget)
+- **Measure before optimizing.** Use `performance-investigation` for "X is slow" — never change code on a guess.
+- **DB hot path** — read `EXPLAIN` plans, fix N+1, add the right indexes; writeups under `docs/performance/db/`. (skill: query-performance)
+- **Cache only after answering the five questions** in `docs/architecture/caching.md`. No silent staleness. (skill: caching-strategy)
+- **Load test latency-sensitive features** before release; plans under `docs/performance/load-tests/`. (skill: load-test-plan)
+
 ### Enforcement hooks (if wired into this project's `.claude/settings.json`)
 
 - `require_plan.py` — blocks edits to source files when `docs/plans/CURRENT.md` is missing or stale.

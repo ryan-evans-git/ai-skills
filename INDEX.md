@@ -63,3 +63,11 @@ One-line catalog of every skill in this library.
 - [naming-conventions](skills/code-standards/naming-conventions/SKILL.md) — File / function / variable / test / branch / commit naming; doc at `docs/standards/naming.md`.
 - [typing-strictness](skills/code-standards/typing-strictness/SKILL.md) — Enable strict type checking (mypy/pyright/TS strict/clippy); doc at `docs/standards/typing.md`.
 - [linter-config](skills/code-standards/linter-config/SKILL.md) — Pick and configure linters/formatters; doc at `docs/standards/linting.md`.
+
+## performance
+
+- [performance-budget](skills/performance/performance-budget/SKILL.md) — Define and CI-enforce budgets (latency, page weight, build time); living `docs/performance/budgets.md`.
+- [performance-investigation](skills/performance/performance-investigation/SKILL.md) — Measure → profile → hotspot → fix → benchmark → write up. Per-investigation doc under `docs/performance/investigations/`.
+- [load-test-plan](skills/performance/load-test-plan/SKILL.md) — Realistic steady/ramp/spike/soak load tests with thresholds; output to `docs/performance/load-tests/`.
+- [query-performance](skills/performance/query-performance/SKILL.md) — Read EXPLAIN plans, fix N+1, add the right indexes, add regression guards; writeups under `docs/performance/db/`.
+- [caching-strategy](skills/performance/caching-strategy/SKILL.md) — Five-question framework before adding a cache; living `docs/architecture/caching.md`.

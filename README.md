@@ -6,18 +6,19 @@ Designed so engineers, QA, and other AI agents all operate from the same playboo
 
 ## What's in here
 
-Skills are organized into eight categories:
+Skills are organized into nine categories:
 
 | Category | What it covers |
 | --- | --- |
 | **planning** | PRD creation, story breakdown into phases, sprint retrospectives, ADRs, estimation |
 | **development** | TDD enforcement, phased implementation, PR descriptions, self-review |
-| **documentation** | `docs/` directory structure, draw.io diagrams, OpenAPI/Swagger (MCP-ready), decision log, CHANGELOG, README |
+| **documentation** | `docs/` directory structure, draw.io diagrams, OpenAPI/Swagger (MCP-ready), decision log, CHANGELOG, README, CLAUDE.md bootstrap |
 | **quality** | QA test plans, bug investigation, test pyramid audits, coverage gaps |
 | **operations** | Incident postmortems, deploy checklists, rollback plans |
 | **collaboration** | Handoff prep, onboarding walkthroughs, context snapshots |
 | **security** | Threat models, security reviews, dependency audits, secrets hygiene, auth coverage, PII handling |
 | **code-standards** | Style guide, error handling, logging, naming, typing strictness, linter config |
+| **performance** | Perf budgets, performance investigations, load-test plans, query/index tuning, caching strategy |
 
 Browse the full catalog in [INDEX.md](INDEX.md).
 
@@ -69,7 +70,8 @@ docs/
 ├── qa/               ← QA test plans
 ├── api/              ← OpenAPI / Swagger specs
 ├── security/         ← threat models, security reviews, PII inventory, secrets policy
-└── standards/        ← style guide, error handling, logging, naming, typing, linting
+├── standards/        ← style guide, error handling, logging, naming, typing, linting
+└── performance/      ← perf budgets, investigations, load tests, DB tuning writeups
 ```
 
 The **docs-directory-keeper** skill knows this layout and will create / maintain it.
