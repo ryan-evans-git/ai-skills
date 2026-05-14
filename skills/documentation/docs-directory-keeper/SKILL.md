@@ -30,14 +30,28 @@ docs/
 ├── retros/                ← end-of-phase retrospectives (owned by sprint-retrospective)
 ├── progress/
 │   ├── CURRENT.md         ← the current state-of-the-world snapshot
-│   └── handoffs/          ← per-session handoff notes (owned by handoff-prep)
+│   ├── handoffs/          ← per-session handoff notes (owned by handoff-prep)
+│   └── snapshots/         ← context snapshots (owned by context-snapshot)
 ├── architecture/
 │   ├── system.drawio      ← top-level system diagram (owned by drawio-architect)
 │   └── ...                ← additional diagrams as needed
 ├── postmortems/           ← incident writeups (owned by incident-postmortem)
+├── deploys/               ← per-deploy checklists and rollback plans (owned by deploy-checklist / rollback-plan)
 ├── qa/                    ← QA test plans (owned by qa-test-plan)
 ├── api/                   ← OpenAPI / Swagger specs (owned by swagger-openapi-spec)
 ├── bugs/                  ← bug investigation writeups (owned by bug-investigation)
+├── security/              ← threat models, audit reports, PII + secrets policy (owned by security/*)
+│   ├── threat-models/
+│   ├── dependency-audits/
+│   ├── pii-inventory.md
+│   └── secrets-policy.md
+├── standards/             ← code standards docs (owned by code-standards/*)
+│   ├── style-guide.md
+│   ├── error-handling.md
+│   ├── logging.md
+│   ├── naming.md
+│   ├── typing.md
+│   └── linting.md
 └── onboarding.md          ← getting-started doc (owned by onboarding-walkthrough)
 ```
 

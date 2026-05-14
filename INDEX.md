@@ -44,3 +44,21 @@ One-line catalog of every skill in this library.
 - [handoff-prep](skills/collaboration/handoff-prep/SKILL.md) — Write a handoff doc for the next dev or agent: state, blockers, next steps.
 - [onboarding-walkthrough](skills/collaboration/onboarding-walkthrough/SKILL.md) — Generate / maintain `docs/onboarding.md` for new team members.
 - [context-snapshot](skills/collaboration/context-snapshot/SKILL.md) — Capture current session state into `docs/progress/` so a future agent or human can pick up cold.
+
+## security
+
+- [threat-model](skills/security/threat-model/SKILL.md) — STRIDE-style threat model for a new feature, service, or significant change; output under `docs/security/threat-models/`.
+- [security-review](skills/security/security-review/SKILL.md) — Diff-level review against OWASP Top 10 + common code-level vulnerabilities.
+- [dependency-audit](skills/security/dependency-audit/SKILL.md) — Scan deps for CVEs and abandoned packages; report under `docs/security/dependency-audits/`.
+- [secrets-hygiene](skills/security/secrets-hygiene/SKILL.md) — Scan for committed secrets, audit `.env` and `.gitignore`, maintain `docs/security/secrets-policy.md`.
+- [auth-checklist](skills/security/auth-checklist/SKILL.md) — Verify every HTTP route enforces authn + authz; cross-checks OpenAPI spec against route handlers.
+- [pii-data-handling](skills/security/pii-data-handling/SKILL.md) — Maintain `docs/security/pii-inventory.md` — classification + handling rules per field.
+
+## code-standards
+
+- [style-guide-keeper](skills/code-standards/style-guide-keeper/SKILL.md) — Maintain `docs/standards/style-guide.md` pointing at the authoritative external guide per language plus project deviations.
+- [error-handling-standards](skills/code-standards/error-handling-standards/SKILL.md) — Typed errors at boundaries, no silent swallow, log-once-at-the-top; doc at `docs/standards/error-handling.md`.
+- [logging-standards](skills/code-standards/logging-standards/SKILL.md) — Structured logging, required context fields, no PII; doc at `docs/standards/logging.md`.
+- [naming-conventions](skills/code-standards/naming-conventions/SKILL.md) — File / function / variable / test / branch / commit naming; doc at `docs/standards/naming.md`.
+- [typing-strictness](skills/code-standards/typing-strictness/SKILL.md) — Enable strict type checking (mypy/pyright/TS strict/clippy); doc at `docs/standards/typing.md`.
+- [linter-config](skills/code-standards/linter-config/SKILL.md) — Pick and configure linters/formatters; doc at `docs/standards/linting.md`.

@@ -6,7 +6,7 @@ Designed so engineers, QA, and other AI agents all operate from the same playboo
 
 ## What's in here
 
-Skills are organized into six categories:
+Skills are organized into eight categories:
 
 | Category | What it covers |
 | --- | --- |
@@ -16,6 +16,8 @@ Skills are organized into six categories:
 | **quality** | QA test plans, bug investigation, test pyramid audits, coverage gaps |
 | **operations** | Incident postmortems, deploy checklists, rollback plans |
 | **collaboration** | Handoff prep, onboarding walkthroughs, context snapshots |
+| **security** | Threat models, security reviews, dependency audits, secrets hygiene, auth coverage, PII handling |
+| **code-standards** | Style guide, error handling, logging, naming, typing strictness, linter config |
 
 Browse the full catalog in [INDEX.md](INDEX.md).
 
@@ -61,7 +63,9 @@ docs/
 ├── architecture/     ← draw.io diagrams + supporting notes
 ├── postmortems/      ← incident writeups
 ├── qa/               ← QA test plans
-└── api/              ← OpenAPI / Swagger specs
+├── api/              ← OpenAPI / Swagger specs
+├── security/         ← threat models, security reviews, PII inventory, secrets policy
+└── standards/        ← style guide, error handling, logging, naming, typing, linting
 ```
 
 The **docs-directory-keeper** skill knows this layout and will create / maintain it.
