@@ -11,7 +11,11 @@ These two refuse edits when their preconditions aren't met:
 
 ## SessionStart — auto-refresh CLAUDE.md
 
-- **`refresh_claude_md.py`** (skill: `claude-md-bootstrap`) — at the start of every session, regenerates the managed section between the `<!-- BEGIN ai-skills MANAGED -->` and `<!-- END ai-skills MANAGED -->` markers in the project's `CLAUDE.md`. Hand-written content outside the markers is preserved. Does nothing if CLAUDE.md doesn't exist or doesn't contain the markers — so installing the hook never clobbers existing project documentation.
+- **`refresh_claude_md.py`** (skill: `claude-md-bootstrap`) — at the start of every session:
+  - If `CLAUDE.md` exists with the `<!-- BEGIN ai-skills MANAGED -->` / `<!-- END ai-skills MANAGED -->` markers → regenerates just the managed section; hand-written content outside the markers is preserved.
+  - If `CLAUDE.md` exists *without* the markers → skipped (the user wrote their own; we don't clobber).
+  - If `CLAUDE.md` doesn't exist *and* the cwd is inside a git repo → auto-creates it from the full template so older projects pick up house rules automatically.
+  - If `CLAUDE.md` doesn't exist *and* there's no `.git/` walking up → skipped (avoid creating files in ad-hoc / scratch dirs).
 
 ## Wiring them up
 

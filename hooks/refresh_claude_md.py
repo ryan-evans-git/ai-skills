@@ -1,16 +1,19 @@
 #!/usr/bin/env python3
-"""SessionStart hook: refresh the managed section of CLAUDE.md from the ai-skills template.
+"""SessionStart hook: create or refresh CLAUDE.md from the ai-skills template.
 
 Wired in via .claude/settings.json. Reads the SessionStart event payload on stdin
-and updates CLAUDE.md at the project root if appropriate.
+and ensures the project's CLAUDE.md is current.
 
 Behavior:
   - If CLAUDE.md exists AND contains BEGIN/END ai-skills markers → regenerate the
     managed section in place. Hand-written content outside markers is preserved.
   - If CLAUDE.md exists WITHOUT markers → do nothing (the user wrote their own
     file and we don't want to clobber it). Surface a one-line hint on stderr.
-  - If CLAUDE.md doesn't exist → do nothing. The user must run the
-    `claude-md-bootstrap` skill to opt in.
+  - If CLAUDE.md doesn't exist AND the cwd is inside a git repo → create it
+    from the full template, with placeholders rendered. Older projects that
+    never had a CLAUDE.md get one automatically.
+  - If CLAUDE.md doesn't exist AND no .git/ is found walking up from cwd →
+    do nothing. Avoids creating CLAUDE.md in ad-hoc / scratch directories.
 
 Always exits 0 — failures here must never block a session from starting.
 
@@ -76,12 +79,18 @@ def render(text: str, project_name: str) -> str:
     )
 
 
-def find_project_root(start: Path) -> Path:
+def find_project_root(start: Path) -> tuple[Path, bool]:
+    """Walk up from `start` looking for a .git/ directory.
+
+    Returns (root, found): root is the directory containing .git/ if found,
+    else `start` resolved. `found` indicates whether we actually located a
+    git repo — used to decide whether auto-creating CLAUDE.md is appropriate.
+    """
     cur = start.resolve()
     for candidate in [cur, *cur.parents]:
         if (candidate / ".git").exists():
-            return candidate
-    return start
+            return candidate, True
+    return cur, False
 
 
 def main() -> int:
@@ -94,16 +103,30 @@ def main() -> int:
         payload = {}
 
     cwd = Path(payload.get("cwd") or os.getcwd())
-    project_root = find_project_root(cwd)
+    project_root, in_git_repo = find_project_root(cwd)
     claude_md = project_root / "CLAUDE.md"
 
-    if not claude_md.exists():
-        return 0
     if not TEMPLATE_PATH.exists():
         print(
-            f"refresh_claude_md: template missing at {TEMPLATE_PATH}; skipping refresh.",
+            f"refresh_claude_md: template missing at {TEMPLATE_PATH}; skipping.",
             file=sys.stderr,
         )
+        return 0
+
+    template_text = TEMPLATE_PATH.read_text(encoding="utf-8")
+
+    if not claude_md.exists():
+        if not in_git_repo:
+            return 0  # ad-hoc dir; don't create
+        try:
+            rendered = render(template_text, project_root.name)
+            claude_md.write_text(rendered, encoding="utf-8")
+            print(
+                f"refresh_claude_md: created {claude_md} from ai-skills template.",
+                file=sys.stderr,
+            )
+        except OSError as e:
+            print(f"refresh_claude_md: failed to create CLAUDE.md: {e}", file=sys.stderr)
         return 0
 
     current = claude_md.read_text(encoding="utf-8")
@@ -115,7 +138,6 @@ def main() -> int:
         )
         return 0
 
-    template_text = TEMPLATE_PATH.read_text(encoding="utf-8")
     new_block_raw = extract_managed_block(template_text)
     if new_block_raw is None:
         print(

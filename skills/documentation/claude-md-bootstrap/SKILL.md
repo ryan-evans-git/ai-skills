@@ -15,10 +15,12 @@ The file has two regions:
 
 ## When to use
 
-- Starting a new project.
-- An older project doesn't have a CLAUDE.md yet, or has one that predates the ai-skills library.
+- A new project where the SessionStart hook isn't wired in yet (manual bootstrap).
+- An older project where the user wants to refresh CLAUDE.md right now rather than waiting for the next session start.
 - The user says: "set up CLAUDE.md", "bootstrap CLAUDE.md", "install house rules", "give this repo the ai-skills baseline".
-- After pulling a new version of ai-skills, and you want to see the changes reflected immediately rather than waiting for the next session start.
+- After pulling a new version of ai-skills and wanting the changes visible immediately.
+
+**Note:** when the `refresh_claude_md.py` SessionStart hook is wired into `.claude/settings.json`, it automatically creates CLAUDE.md from the template the first time it runs in any git repo and refreshes the managed section every session after. This skill is for explicit, on-demand creation/refresh; the hook is for the steady state.
 
 ## Process
 
