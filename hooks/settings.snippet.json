@@ -1,0 +1,13 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|NotebookEdit",
+        "hooks": [
+          { "type": "command", "command": ".claude/skills/ai-skills/hooks/require_plan.py" },
+          { "type": "command", "command": ".claude/skills/ai-skills/hooks/require_failing_test.py" }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,123 @@
+openapi: 3.1.0
+info:
+  title: <Service name> API
+  version: 0.1.0
+  description: |
+    <What this service is for, in agent-facing terms. An LLM reading this should
+    understand the service's purpose well enough to pick the right tools from it.
+
+    Mention any service-wide conventions: auth, pagination, error format, versioning.>
+  contact:
+    name: <team>
+    email: <team@example.com>
+
+servers:
+  - url: https://api.example.com
+    description: Production
+  - url: https://staging.api.example.com
+    description: Staging
+  - url: http://localhost:8000
+    description: Local dev
+
+tags:
+  - name: <group-name>
+    description: <one line describing this group of operations>
+
+security:
+  - bearerAuth: []
+
+paths:
+  /example/{id}:
+    get:
+      operationId: getExampleById
+      summary: Fetch an example by ID
+      description: |
+        Fetch a single example resource by its numeric ID. Use this when you have
+        an example ID (e.g. from a previous listExamples call) and need the full
+        record. Returns 404 if no example exists with that ID.
+
+        Do not use this to search by name — see `findExampleByName`.
+      tags: [examples]
+      x-mcp-side-effects: read-only
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Numeric ID of the example, as returned by listExamples.
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        "200":
+          description: Example found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+              example:
+                id: 42
+                name: "demo"
+                createdAt: "2026-05-14T10:00:00Z"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalError"
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token obtained from the auth service.
+
+  schemas:
+    Example:
+      type: object
+      required: [id, name, createdAt]
+      properties:
+        id:
+          type: integer
+          description: Stable numeric identifier.
+        name:
+          type: string
+          description: Human-readable name.
+          maxLength: 255
+        createdAt:
+          type: string
+          format: date-time
+          description: ISO-8601 timestamp of creation.
+
+    Error:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code (e.g. `not_found`).
+        message:
+          type: string
+          description: Human-readable error message.
+        details:
+          type: object
+          additionalProperties: true
+          description: Optional structured details about the error.
+
+  responses:
+    Unauthorized:
+      description: Auth token missing or invalid.
+      content:
+        application/json:
+          schema: { $ref: "#/components/schemas/Error" }
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema: { $ref: "#/components/schemas/Error" }
+    InternalError:
+      description: Unexpected server error.
+      content:
+        application/json:
+          schema: { $ref: "#/components/schemas/Error" }
