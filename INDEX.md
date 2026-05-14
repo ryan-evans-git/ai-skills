@@ -20,6 +20,7 @@ One-line catalog of every skill in this library.
 ## documentation
 
 - [docs-directory-keeper](skills/documentation/docs-directory-keeper/SKILL.md) — Enforce the standard `docs/` layout and keep `docs/progress/CURRENT.md` up to date.
+- [claude-md-bootstrap](skills/documentation/claude-md-bootstrap/SKILL.md) — Create / refresh the project's `CLAUDE.md` with managed house rules; pairs with the `refresh_claude_md.py` SessionStart hook.
 - [drawio-architect](skills/documentation/drawio-architect/SKILL.md) — Every project has `docs/architecture/system.drawio`; update on structural changes.
 - [swagger-openapi-spec](skills/documentation/swagger-openapi-spec/SKILL.md) — Every HTTP route is in an OpenAPI spec with MCP-ready `operationId`s and tool-style descriptions.
 - [decision-log](skills/documentation/decision-log/SKILL.md) — Append-only lightweight log for decisions that don't merit a full ADR.

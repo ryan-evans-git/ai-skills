@@ -1,0 +1,95 @@
+# {{project_name}}
+
+<!--
+  CLAUDE.md is loaded into Claude's context on every session in this repo.
+  Keep it short — every line costs context budget.
+
+  This file has two regions:
+    1. Hand-written (the sections OUTSIDE the BEGIN/END ai-skills markers below)
+       — project-specific facts. Edit freely.
+    2. Managed (the section BETWEEN the markers) — regenerated each session by
+       the ai-skills SessionStart hook. Do NOT hand-edit inside the markers;
+       changes will be overwritten on the next session.
+-->
+
+## About this project
+
+<One paragraph. What this project is, who uses it, what makes it different from a generic project. If you don't know yet, leave this and fill in later.>
+
+## Stack
+
+<Languages, frameworks, key libraries. e.g. "Python 3.12, Flask, LangChain, LangGraph, LangSmith on the backend; TypeScript + React on the frontend.">
+
+## Project-specific conventions
+
+<Anything Claude needs to know about THIS repo that overrides or extends the defaults in the managed section below. Examples:
+  - Preferred patterns ("all DB access goes through the repository layer in src/repos/").
+  - Areas to ask about before touching ("don't change anything under src/legacy/ without asking").
+  - Owners ("billing code: ask @alice; ingestion: ask @bob").
+  - Non-obvious gotchas ("tests/test_e2e/ requires LOCAL_DOCKER=1; skip otherwise").>
+
+<!-- BEGIN ai-skills MANAGED — do not edit by hand; refreshed at session start by refresh_claude_md.py -->
+
+## House rules
+
+This project uses the [ai-skills](https://github.com/ryan-evans-git/ai-skills) shared skills library.
+Library version: `{{commit_sha}}` · refreshed `{{date}}` · {{skill_count}} skills available.
+See the [skills index]({{index_url}}) for the full catalog.
+
+### Default workflow
+
+- **Plan before code.** Work is broken into phases → stories → tasks. The live plan is `docs/plans/CURRENT.md`. (skill: phased-implementation; enforced by `require_plan.py` hook if installed)
+- **TDD by default.** Every behavior change starts with a failing test. (skill: tdd-enforcer; enforced by `require_failing_test.py` hook if installed)
+- **Capture decisions.** Significant choices become ADRs under `docs/decisions/`. Quick decisions land in `docs/decisions/log.md`. (skills: adr-writer, decision-log)
+- **Retros at phase boundaries.** Write to `docs/retros/`. (skill: sprint-retrospective)
+- **Handoff before stopping.** Long sessions end with a handoff doc under `docs/progress/handoffs/`. (skill: handoff-prep)
+
+### Standard `docs/` layout
+
+```
+docs/
+├── prds/           plans/          decisions/      retros/
+├── progress/       architecture/   postmortems/    deploys/
+├── qa/             api/            bugs/           security/
+└── standards/
+```
+
+(skill: docs-directory-keeper)
+
+### Documentation expectations
+
+- **Architecture diagram** — `docs/architecture/system.drawio` reflects the current system. (skill: drawio-architect)
+- **OpenAPI spec** — every HTTP route is in `docs/api/openapi.yaml` with an MCP-ready `operationId`, summary, and agent-facing description. (skill: swagger-openapi-spec)
+- **README** stays current with how to run the project. (skill: readme-generator)
+- **CHANGELOG** maintained per Keep-a-Changelog. (skill: changelog-keeper)
+
+### Code standards
+
+- **Errors** — typed at boundaries, no silent swallow, log-once-at-the-top. See `docs/standards/error-handling.md`. (skill: error-handling-standards)
+- **Logging** — structured, includes `request_id`/`trace_id`, NEVER includes PII or secrets. See `docs/standards/logging.md`. (skill: logging-standards)
+- **Naming** — see `docs/standards/naming.md`. (skill: naming-conventions)
+- **Types** — strict-mode checker on (mypy/pyright/TS strict/clippy). See `docs/standards/typing.md`. (skill: typing-strictness)
+- **Lint/format** — config committed; pre-commit hook runs locally; CI fails on violations. See `docs/standards/linting.md`. (skill: linter-config)
+- **Style** — see `docs/standards/style-guide.md`. (skill: style-guide-keeper)
+
+### Security defaults
+
+- **Authn + authz on every HTTP route**, deny-by-default. (skill: auth-checklist)
+- **No secrets in code** — env vars or a secrets manager. Pre-commit secret scan recommended. (skill: secrets-hygiene)
+- **PII** — see `docs/security/pii-inventory.md` for what's classified as PII / Sensitive and the handling rules. (skill: pii-data-handling)
+- **Dependencies audited** before each release. (skill: dependency-audit)
+- **Threat model** for any new auth flow, integration, or sensitive feature. (skill: threat-model)
+- **Diff-level security review** before merging anything that touches user input, auth, or external calls. (skill: security-review)
+
+### Enforcement hooks (if wired into this project's `.claude/settings.json`)
+
+- `require_plan.py` — blocks edits to source files when `docs/plans/CURRENT.md` is missing or stale.
+- `require_failing_test.py` — blocks edits to production code without a recently-touched test file.
+- `refresh_claude_md.py` — regenerates this section at session start.
+- Bypass env vars: `AI_SKILLS_BYPASS_PLAN=1`, `AI_SKILLS_BYPASS_TDD=1`, `AI_SKILLS_NO_REFRESH_CLAUDE_MD=1`.
+
+<!-- END ai-skills MANAGED -->
+
+## Anything else
+
+<More project-specific notes go below — outside the managed region so they survive refreshes.>

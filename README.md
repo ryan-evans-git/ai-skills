@@ -42,11 +42,15 @@ git submodule add https://github.com/ryan-evans-git/ai-skills.git .claude/skills
 
 Claude Code auto-loads skills from `.claude/skills/`. Anyone who clones the repo with `--recurse-submodules` gets the same skill set.
 
-### Enforcement hooks (TDD + phased implementation)
+### Hooks
 
-Two skills — **tdd-enforcer** and **phased-implementation** — ship with PreToolUse hook scripts that **block edits** when their preconditions aren't met (no failing test exists, no current plan in `docs/plans/CURRENT.md`).
+Three hooks ship with the library, all opt-in per project via `.claude/settings.json`:
 
-See [hooks/README.md](hooks/README.md) for how to wire them into a project's `.claude/settings.json`. Hooks are opt-in per project.
+- **`require_plan.py`** (PreToolUse) — blocks edits unless `docs/plans/CURRENT.md` exists and is recent.
+- **`require_failing_test.py`** (PreToolUse) — blocks edits to production code without a recently-touched test.
+- **`refresh_claude_md.py`** (SessionStart) — regenerates the managed section of `CLAUDE.md` each session so house rules stay current as the library evolves. Hand-written content outside the managed markers is preserved.
+
+See [hooks/README.md](hooks/README.md) for wiring details.
 
 ## Conventions
 

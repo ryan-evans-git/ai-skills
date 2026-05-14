@@ -1,11 +1,17 @@
-# Enforcement hooks
+# Hooks
 
-Two skills in this library are designed to **block edits** when their preconditions aren't met:
+This library ships three hooks. All are **opt-in per project** — you add them to a project's `.claude/settings.json` if you want them.
 
-- **tdd-enforcer** — refuses to modify production code unless a corresponding test file has been touched more recently than the production file, or the edit is to a test file itself.
-- **phased-implementation** — refuses to modify source files unless `docs/plans/CURRENT.md` exists and has been updated recently (default: within the last 7 days).
+## PreToolUse — blocking enforcement
 
-Both are enforced via Claude Code `PreToolUse` hooks. They are **opt-in per project** — you add them to a project's `.claude/settings.json` if you want enforcement.
+These two refuse edits when their preconditions aren't met:
+
+- **`require_plan.py`** (skill: `phased-implementation`) — refuses to modify source files unless `docs/plans/CURRENT.md` exists and has been updated within the last 7 days.
+- **`require_failing_test.py`** (skill: `tdd-enforcer`) — refuses to modify production code unless a corresponding test file has been touched more recently than the production file, or the edit is to a test file itself.
+
+## SessionStart — auto-refresh CLAUDE.md
+
+- **`refresh_claude_md.py`** (skill: `claude-md-bootstrap`) — at the start of every session, regenerates the managed section between the `<!-- BEGIN ai-skills MANAGED -->` and `<!-- END ai-skills MANAGED -->` markers in the project's `CLAUDE.md`. Hand-written content outside the markers is preserved. Does nothing if CLAUDE.md doesn't exist or doesn't contain the markers — so installing the hook never clobbers existing project documentation.
 
 ## Wiring them up
 
@@ -14,6 +20,13 @@ Copy the snippet from `settings.snippet.json` into your project's `.claude/setti
 ```jsonc
 {
   "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          { "type": "command", "command": ".claude/skills/ai-skills/hooks/refresh_claude_md.py" }
+        ]
+      }
+    ],
     "PreToolUse": [
       {
         "matcher": "Edit|Write|NotebookEdit",
@@ -27,7 +40,7 @@ Copy the snippet from `settings.snippet.json` into your project's `.claude/setti
 }
 ```
 
-Adjust the path if you installed the library somewhere other than `.claude/skills/ai-skills`.
+Adjust the path if you installed the library somewhere other than `.claude/skills/ai-skills` (e.g. for a personal install, use the absolute path to your ai-skills checkout).
 
 ## How blocking works
 
@@ -40,16 +53,18 @@ When a hook blocks, Claude sees the stderr message and can adjust — typically 
 
 ## Bypass mechanisms
 
-Both hooks honor an env var escape hatch for emergencies:
+All three hooks honor env var escape hatches:
 
 - `AI_SKILLS_BYPASS_TDD=1` — skip the TDD check
 - `AI_SKILLS_BYPASS_PLAN=1` — skip the plan-required check
+- `AI_SKILLS_NO_REFRESH_CLAUDE_MD=1` — skip the CLAUDE.md refresh
 
 Use bypasses sparingly; the skills are designed to be the default.
 
 ## What the hooks DON'T do
 
-- They don't run your tests. They check that a test file was *touched* recently — they don't verify it failed. The intent is to make TDD friction-free for engineers who already work that way and surface the requirement to those who don't.
-- They don't validate the plan content. They check that `docs/plans/CURRENT.md` exists and is recent. Quality of the plan is on you.
+- The PreToolUse hooks don't run your tests. They check that a test file was *touched* recently — they don't verify it failed. The intent is to make TDD friction-free for engineers who already work that way and surface the requirement to those who don't.
+- The plan-required hook doesn't validate plan content. It checks that `docs/plans/CURRENT.md` exists and is recent. Quality of the plan is on you.
+- `refresh_claude_md.py` doesn't pull from a remote. It uses whatever version of the ai-skills library is currently checked out wherever the hook script lives. To get newer library content, `git pull` (or `git submodule update --remote`) the ai-skills checkout — the next session start picks it up automatically.
 
-Both are intentionally lightweight. If you want stricter enforcement (actually run the test and require it to fail first), extend the scripts.
+The PreToolUse hooks are intentionally lightweight. If you want stricter enforcement (actually run the test and require it to fail first), extend the scripts.
