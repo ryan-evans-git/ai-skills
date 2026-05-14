@@ -57,6 +57,15 @@ docs/
 │   ├── investigations/
 │   ├── load-tests/
 │   └── db/
+├── cicd/                  ← pipeline, branch protection, release strategy, env-parity (owned by cicd/*)
+│   ├── pipeline.md
+│   ├── branch-protection.md
+│   ├── release-strategy.md
+│   ├── release-flow.md
+│   └── environment-parity.md
+├── integration/           ← service map and contract policy (owned by integration/*)
+│   ├── service-map.md
+│   └── api-contract-policy.md
 └── onboarding.md          ← getting-started doc (owned by onboarding-walkthrough)
 ```
 

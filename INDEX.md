@@ -54,6 +54,9 @@ One-line catalog of every skill in this library.
 - [secrets-hygiene](skills/security/secrets-hygiene/SKILL.md) — Scan for committed secrets, audit `.env` and `.gitignore`, maintain `docs/security/secrets-policy.md`.
 - [auth-checklist](skills/security/auth-checklist/SKILL.md) — Verify every HTTP route enforces authn + authz; cross-checks OpenAPI spec against route handlers.
 - [pii-data-handling](skills/security/pii-data-handling/SKILL.md) — Maintain `docs/security/pii-inventory.md` — classification + handling rules per field.
+- [data-retention-policy](skills/security/data-retention-policy/SKILL.md) — Per-class retention rules + enforcement; living `docs/security/retention-policy.md`.
+- [right-to-delete](skills/security/right-to-delete/SKILL.md) — End-to-end user-deletion procedure spanning primary stores, derived data, caches, third parties, and backups. Map at `docs/security/deletion-map.md`.
+- [audit-log-retention](skills/security/audit-log-retention/SKILL.md) — Separate retention + integrity policy for compliance / audit logs; spec at `docs/security/audit-log-spec.md`.
 
 ## code-standards
 
@@ -71,3 +74,35 @@ One-line catalog of every skill in this library.
 - [load-test-plan](skills/performance/load-test-plan/SKILL.md) — Realistic steady/ramp/spike/soak load tests with thresholds; output to `docs/performance/load-tests/`.
 - [query-performance](skills/performance/query-performance/SKILL.md) — Read EXPLAIN plans, fix N+1, add the right indexes, add regression guards; writeups under `docs/performance/db/`.
 - [caching-strategy](skills/performance/caching-strategy/SKILL.md) — Five-question framework before adding a cache; living `docs/architecture/caching.md`.
+
+## architecture
+
+- [api-design](skills/architecture/api-design/SKILL.md) — Opinionated conventions for REST resource modeling, status codes, pagination, errors, idempotency, money/time.
+- [resilience-patterns](skills/architecture/resilience-patterns/SKILL.md) — Timeouts, retries, idempotency keys, circuit breakers, bulkheads, graceful degradation, backpressure, health checks.
+- [service-boundaries](skills/architecture/service-boundaries/SKILL.md) — Force-based decision framework for when to extract a new service vs. keep as a module.
+- [data-modeling](skills/architecture/data-modeling/SKILL.md) — Schema conventions: PKs, naming, nullability, FKs, soft deletes, JSON columns, multi-tenancy.
+- [twelve-factor-checklist](skills/architecture/twelve-factor-checklist/SKILL.md) — Audit a service against the twelve-factor app principles; report at `docs/architecture/twelve-factor-audit.md`.
+
+## cicd
+
+- [pipeline-design](skills/cicd/pipeline-design/SKILL.md) — Stages, parallelization, caching, fail-fast, required vs. optional checks; doc at `docs/cicd/pipeline.md`.
+- [branch-protection](skills/cicd/branch-protection/SKILL.md) — Standard branch protection rule set + CODEOWNERS; doc at `docs/cicd/branch-protection.md`.
+- [artifact-promotion](skills/cicd/artifact-promotion/SKILL.md) — Build once, promote the same artifact through environments; release flow at `docs/cicd/release-flow.md`.
+- [release-strategy](skills/cicd/release-strategy/SKILL.md) — Cadence, versioning scheme, tagging, release notes, authority; doc at `docs/cicd/release-strategy.md`.
+- [environment-parity](skills/cicd/environment-parity/SKILL.md) — Parity matrix across dev/CI/staging/prod; living `docs/cicd/environment-parity.md`.
+- [flaky-test-management](skills/cicd/flaky-test-management/SKILL.md) — Detect → quarantine → root-cause → fix → re-enable lifecycle with budget and time limit.
+
+## integration
+
+- [service-map](skills/integration/service-map/SKILL.md) — Living service map of upstream callers and downstream dependencies; `docs/integration/service-map.md`.
+- [upstream-callers](skills/integration/upstream-callers/SKILL.md) — Consult the service map and classify breaking-vs-additive before any public API change.
+- [downstream-dependencies](skills/integration/downstream-dependencies/SKILL.md) — Pre-integration checklist covering contract, SLA, failure mode, observability, and cost.
+- [api-contract-evolution](skills/integration/api-contract-evolution/SKILL.md) — Versioning, deprecation, sunset policy; living `docs/integration/api-contract-policy.md`.
+- [integration-contract-tests](skills/integration/integration-contract-tests/SKILL.md) — Schema or pact-style contract tests wired into CI.
+
+## dev-environment
+
+- [dev-storage-audit](skills/dev-environment/dev-storage-audit/SKILL.md) — Find where disk is *actually* going across Docker, project caches, worktrees, IDE caches, downloads. Run this first.
+- [docker-cleanup](skills/dev-environment/docker-cleanup/SKILL.md) — Reclaim Docker disk safely; per-resource decision tree; never silently destroy data.
+- [worktree-cleanup](skills/dev-environment/worktree-cleanup/SKILL.md) — Find stale git worktrees and orphan branches; check for uncommitted work before removing.
+- [dependency-cache-cleanup](skills/dev-environment/dependency-cache-cleanup/SKILL.md) — Per-project (`node_modules`, `target`, `.venv`) and user-level caches; safety + recency scoring.

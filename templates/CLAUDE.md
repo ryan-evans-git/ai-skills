@@ -89,6 +89,36 @@ docs/
 - **Cache only after answering the five questions** in `docs/architecture/caching.md`. No silent staleness. (skill: caching-strategy)
 - **Load test latency-sensitive features** before release; plans under `docs/performance/load-tests/`. (skill: load-test-plan)
 
+### Architecture defaults
+
+- **API design** follows the conventions in `api-design` (REST resource modeling, status codes, pagination, errors, idempotency, money/time).
+- **Resilience by default** — every network call has a timeout, retry policy, idempotency strategy, and documented failure mode. (skill: resilience-patterns)
+- **Don't reach for a new service.** Walk the force analysis in `service-boundaries` before extracting.
+- **Schemas follow the conventions** in `data-modeling` (UUIDv7 PKs, FKs always declared, soft deletes deliberate, tenant_id leading in composite indexes).
+- **Twelve-factor audit** for any deployable service: `docs/architecture/twelve-factor-audit.md`.
+
+### Integration defaults
+
+- **Consult `docs/integration/service-map.md` before any public-API change.** Classify as additive / subtly-breaking / breaking. (skill: upstream-callers)
+- **Run the dependency checklist before adding any downstream call** — contract, SLA, failure mode, timeout, retries, observability, cost. (skill: downstream-dependencies)
+- **Versioning + deprecation policy** documented at `docs/integration/api-contract-policy.md`. Sunsets are calendared, never indefinite. (skill: api-contract-evolution)
+- **Contract tests** wired into CI for every active integration. (skill: integration-contract-tests)
+
+### CI/CD defaults
+
+- **PR pipeline under 10 min** on the critical path; fail-fast cheap → expensive. (skill: pipeline-design)
+- **Required checks match pipeline stages exactly.** Branch protection enforces them. (skill: branch-protection)
+- **Build once, promote everywhere.** No `docker build` in deploy steps. (skill: artifact-promotion)
+- **Versioning + release strategy** documented at `docs/cicd/release-strategy.md`. (skill: release-strategy)
+- **Dev/CI/staging/prod parity** audited and tracked in `docs/cicd/environment-parity.md`. (skill: environment-parity)
+- **Flaky tests get quarantined within 24h, fixed within 30d, or deleted.** No forever-quarantine. (skill: flaky-test-management)
+
+### Data lifecycle defaults
+
+- **Retention policy** per data class at `docs/security/retention-policy.md`. Enforced, not aspirational. (skill: data-retention-policy)
+- **User-deletion** walks the deletion map at `docs/security/deletion-map.md` — primary store, derived data, caches, third parties, backups. (skill: right-to-delete)
+- **Audit logs** are separate from operational logs, append-only, with their own retention. Exempt from user-deletion. (skill: audit-log-retention)
+
 ### Enforcement hooks (if wired into this project's `.claude/settings.json`)
 
 - `require_plan.py` — blocks edits to source files when `docs/plans/CURRENT.md` is missing or stale.

@@ -6,7 +6,7 @@ Designed so engineers, QA, and other AI agents all operate from the same playboo
 
 ## What's in here
 
-Skills are organized into nine categories:
+Skills are organized into thirteen categories:
 
 | Category | What it covers |
 | --- | --- |
@@ -16,9 +16,13 @@ Skills are organized into nine categories:
 | **quality** | QA test plans, bug investigation, test pyramid audits, coverage gaps |
 | **operations** | Incident postmortems, deploy checklists, rollback plans |
 | **collaboration** | Handoff prep, onboarding walkthroughs, context snapshots |
-| **security** | Threat models, security reviews, dependency audits, secrets hygiene, auth coverage, PII handling |
+| **security** | Threat models, security reviews, dependency audits, secrets hygiene, auth coverage, PII handling, data retention, right-to-delete, audit log retention |
 | **code-standards** | Style guide, error handling, logging, naming, typing strictness, linter config |
 | **performance** | Perf budgets, performance investigations, load-test plans, query/index tuning, caching strategy |
+| **architecture** | API design, resilience patterns, service boundaries, data modeling, twelve-factor checklist |
+| **cicd** | Pipeline design, branch protection, artifact promotion, release strategy, environment parity, flaky-test management |
+| **integration** | Service map, upstream-callers review, downstream-dependencies checklist, API contract evolution, contract tests |
+| **dev-environment** | Dev-machine disk audit, Docker cleanup, git worktree cleanup, dependency cache cleanup |
 
 Browse the full catalog in [INDEX.md](INDEX.md).
 
@@ -69,9 +73,12 @@ docs/
 ├── postmortems/      ← incident writeups
 ├── qa/               ← QA test plans
 ├── api/              ← OpenAPI / Swagger specs
-├── security/         ← threat models, security reviews, PII inventory, secrets policy
+├── security/         ← threat models, reviews, PII inventory, secrets/retention policy, audit-log spec
 ├── standards/        ← style guide, error handling, logging, naming, typing, linting
-└── performance/      ← perf budgets, investigations, load tests, DB tuning writeups
+├── performance/      ← perf budgets, investigations, load tests, DB tuning writeups
+├── architecture/     ← (extended) twelve-factor audit, caching strategy, system diagrams
+├── cicd/             ← pipeline design, branch protection, release strategy, env-parity matrix
+└── integration/      ← service map, API contract policy, contract tests
 ```
 
 The **docs-directory-keeper** skill knows this layout and will create / maintain it.
