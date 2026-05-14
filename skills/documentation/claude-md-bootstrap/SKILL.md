@@ -46,7 +46,7 @@ The file has two regions:
 | Hand-written (above and below markers) | Project name, what it does, stack, project-specific conventions, owners | Humans |
 | Managed (inside markers) | House rules from ai-skills (TDD, phased, docs/, code standards, security defaults), library version, skill count, pointers | The SessionStart hook |
 
-The hand-written sections are where Kinimatic-specific (or project-specific) facts go: "we use Flask + LangGraph", "the auth flow is at X", "ask before touching the LangSmith config." Those facts never get clobbered.
+The hand-written sections are where project-specific facts go: "we use framework X", "the auth flow lives at Y", "ask before touching the Z config." Those facts never get clobbered.
 
 ## What this skill does NOT do
 
