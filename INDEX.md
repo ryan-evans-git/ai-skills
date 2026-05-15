@@ -4,6 +4,8 @@ One-line catalog of every skill in this library.
 
 ## planning
 
+- [requirements-clarification](skills/planning/requirements-clarification/SKILL.md) — Detect load-bearing ambiguity and ask 1-3 high-leverage questions (with defaults) before significant work. Resists question-bombing via a "would this change the design?" filter.
+- [assumption-surfacing](skills/planning/assumption-surfacing/SKILL.md) — As work proceeds, flag the inferences and defaults being filled in — so corrections happen mid-flight, not after.
 - [prd-creation](skills/planning/prd-creation/SKILL.md) — Author a Product Requirements Doc with problem, users, goals, non-goals, success metrics, milestones.
 - [story-breakdown](skills/planning/story-breakdown/SKILL.md) — Turn a PRD into vertical-slice phases → stories → tasks, written to `docs/plans/CURRENT.md`.
 - [sprint-retrospective](skills/planning/sprint-retrospective/SKILL.md) — Run a structured retro at the end of a phase/sprint; output to `docs/retros/`.

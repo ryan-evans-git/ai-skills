@@ -10,7 +10,7 @@ Skills are organized into sixteen categories:
 
 | Category | What it covers |
 | --- | --- |
-| **planning** | PRD creation, story breakdown into phases, sprint retrospectives, ADRs, estimation |
+| **planning** | Requirements clarification, assumption surfacing, PRD creation, story breakdown, retros, ADRs, estimation |
 | **development** | TDD enforcement, phased implementation, PR descriptions, self-review |
 | **documentation** | `docs/` directory structure, draw.io diagrams, OpenAPI/Swagger (MCP-ready), decision log, CHANGELOG, README, CLAUDE.md bootstrap |
 | **quality** | QA test plans, bug investigation, test pyramid audits, coverage gaps |
