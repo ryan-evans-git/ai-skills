@@ -31,6 +31,49 @@ Browse the full catalog in [INDEX.md](INDEX.md).
 
 In addition to the skills, this repo ships **8 subagents** under [`agents/`](agents/README.md) — specialist roles (code-reviewer, qa-engineer, architect, planner, prompt-evaluator, dependency-auditor, performance-investigator, incident-responder) that the main agent can delegate to. Subagents differ from skills: they run in their own isolated context window with a curated tool allowlist, so they're the right shape for independent reviews, parallel audits, and write-scoped roles.
 
+## How it fits together
+
+Four moving parts: **CLAUDE.md** (always loaded), **skills** (description-triggered playbooks in the main thread), **subagents** (specialist roles in their own isolated context), and **hooks** (run by the harness on events). They compose like this:
+
+```mermaid
+flowchart LR
+    User([User])
+
+    subgraph mainCtx["Main Claude agent context"]
+        direction TB
+        ClaudeMd["CLAUDE.md<br/>always-loaded house rules<br/>(refreshed each session)"]
+        Skills["Skills library<br/>~85 playbooks, 16 categories<br/>auto-triggered by description"]
+        ClaudeMd -. loaded into .-> Skills
+    end
+
+    subgraph subagentCtx["Subagent context (fresh, isolated)"]
+        SubTools["Scoped tools per agent<br/>e.g. code-reviewer: Read, Grep, Bash"]
+        SubSkills["Reads the same Skills<br/>as playbooks"]
+        SubTools --- SubSkills
+    end
+
+    subgraph hooks["Harness hooks (.claude/settings.json)"]
+        H1["SessionStart →<br/>refresh_claude_md.py"]
+        H2["PreToolUse →<br/>require_plan.py<br/>require_failing_test.py"]
+    end
+
+    User <--> mainCtx
+    mainCtx -. delegate via Agent tool .-> subagentCtx
+    subagentCtx -. one summary message .-> mainCtx
+
+    H1 -. regenerates managed section .-> ClaudeMd
+    H2 -. blocks bad Edit/Write .-> mainCtx
+```
+
+**The reading order is:**
+
+1. **CLAUDE.md** — loaded unconditionally each session. House rules apply to every turn. The managed section auto-refreshes from this library; the hand-written section stays put.
+2. **Skills** — descriptions are visible to the main agent at session start; the relevant one fires when its description matches the request. Runs in the main thread.
+3. **Subagents** — invoked via the `Agent` tool when isolation matters (independent review, parallel audit, write-scoped role). Each spawns with a fresh context window and a tool allowlist.
+4. **Hooks** — invisible to Claude; the harness runs them on `SessionStart` and `PreToolUse` events. They're how "must" rules get enforced (CLAUDE.md is current, plan exists, test came first) rather than relying on the model to remember.
+
+Canonical diagram: [`docs/architecture/library-overview.drawio`](docs/architecture/library-overview.drawio) — open in [draw.io](https://app.diagrams.net/) or any IDE plugin. The Mermaid above mirrors it for inline rendering.
+
 ## Installing
 
 ### Personal install (across all your projects)
