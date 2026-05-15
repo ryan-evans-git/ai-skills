@@ -36,6 +36,12 @@ This project uses the [ai-skills](https://github.com/ryan-evans-git/ai-skills) s
 Library version: `{{commit_sha}}` · refreshed `{{date}}` · {{skill_count}} skills available.
 See the [skills index]({{index_url}}) for the full catalog.
 
+### Working with ambiguous requests
+
+- **Ask only load-bearing questions.** Before significant work, scan for ambiguity. Ask 1-3 questions ONLY if the answer would change scope, architecture, API surface, data model, security posture, success criteria, or constraints. Offer a default for every question. (skill: requirements-clarification)
+- **Surface everything else inline.** For non-load-bearing inferences (defaults chosen, edge cases handled, names picked), flag them in the response as you go — "Assumed X; flag if wrong." Mid-flight correction is cheaper than diff archaeology. Target 2-7 surfaced assumptions per non-trivial turn. (skill: assumption-surfacing)
+- **"Just go" overrides upfront questions** — fall through to inline surfacing instead.
+
 ### Default workflow
 
 - **Plan before code.** Work is broken into phases → stories → tasks. The live plan is `docs/plans/CURRENT.md`. (skill: phased-implementation; enforced by `require_plan.py` hook if installed)
