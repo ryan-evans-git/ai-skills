@@ -1,6 +1,6 @@
 # ai-skills
 
-A shareable library of Claude Code / Claude Enterprise **skills** that codify a consistent way of working across a team: PRDs, phased delivery, TDD, retros, ADRs, draw.io diagrams, OpenAPI-first APIs, structured `docs/` directories, and more.
+A shareable library of Claude Code / Claude Enterprise **skills** and **subagents** that codify a consistent way of working across a team: PRDs, phased delivery, TDD, retros, ADRs, draw.io diagrams, OpenAPI-first APIs, structured `docs/` directories, plus a roster of specialist agents (code-reviewer, qa-engineer, architect, planner, prompt-evaluator, dependency-auditor, performance-investigator, incident-responder) that run with curated tool allowlists.
 
 Designed so engineers, QA, and other AI agents all operate from the same playbook — and so a new project always starts with the same set of artifacts.
 
@@ -29,6 +29,8 @@ Skills are organized into sixteen categories:
 
 Browse the full catalog in [INDEX.md](INDEX.md).
 
+In addition to the skills, this repo ships **8 subagents** under [`agents/`](agents/README.md) — specialist roles (code-reviewer, qa-engineer, architect, planner, prompt-evaluator, dependency-auditor, performance-investigator, incident-responder) that the main agent can delegate to. Subagents differ from skills: they run in their own isolated context window with a curated tool allowlist, so they're the right shape for independent reviews, parallel audits, and write-scoped roles.
+
 ## Installing
 
 ### Personal install (across all your projects)
@@ -38,7 +40,7 @@ git clone https://github.com/ryan-evans-git/ai-skills.git ~/code/ai-skills
 ~/code/ai-skills/install.sh
 ```
 
-`install.sh` symlinks each skill directory into `~/.claude/skills/` so Claude picks them up everywhere.
+`install.sh` symlinks each skill into `~/.claude/skills/` AND each subagent into `~/.claude/agents/` so Claude picks them up everywhere.
 
 ### Project-scoped install (so QA, other devs, and CI agents pick them up automatically)
 

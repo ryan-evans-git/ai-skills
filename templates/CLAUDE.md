@@ -42,6 +42,21 @@ See the [skills index]({{index_url}}) for the full catalog.
 - **Surface everything else inline.** For non-load-bearing inferences (defaults chosen, edge cases handled, names picked), flag them in the response as you go — "Assumed X; flag if wrong." Mid-flight correction is cheaper than diff archaeology. Target 2-7 surfaced assumptions per non-trivial turn. (skill: assumption-surfacing)
 - **"Just go" overrides upfront questions** — fall through to inline surfacing instead.
 
+### Specialist subagents available
+
+The library ships 8 subagents (installed under `~/.claude/agents/` or `.claude/agents/`) that the main agent can delegate to via the `Agent` tool. Use them when isolation matters (independent review, parallel audit, write-scoped role) rather than running the work in the main thread:
+
+- `code-reviewer` — independent diff/PR review, read-only.
+- `qa-engineer` — test plans, coverage audits, bug writeups.
+- `architect` — ADRs, threat models, service-boundary analysis, API design.
+- `planner` — clarify requirements + draft PRD + phase/story plan.
+- `prompt-evaluator` — run eval suite for a prompt/model change; before/after delta.
+- `dependency-auditor` — CVEs, abandoned packages, licenses, secrets.
+- `performance-investigator` — reproduce → measure → profile → propose fix.
+- `incident-responder` — drive blameless postmortems.
+
+Delegate when the work would pollute the main thread's context or benefits from a fresh, role-scoped agent. For everyday in-thread work, apply the relevant skill directly.
+
 ### Default workflow
 
 - **Plan before code.** Work is broken into phases → stories → tasks. The live plan is `docs/plans/CURRENT.md`. (skill: phased-implementation; enforced by `require_plan.py` hook if installed)
