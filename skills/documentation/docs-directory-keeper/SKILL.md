@@ -66,6 +66,22 @@ docs/
 ├── integration/           ← service map and contract policy (owned by integration/*)
 │   ├── service-map.md
 │   └── api-contract-policy.md
+├── ai/                    ← prompts, evals, cost mgmt, RAG/agent/guardrail docs (owned by ai-engineering/*)
+│   ├── prompt-conventions.md
+│   ├── evals.md
+│   └── cost-management.md
+├── observability/         ← metrics, SLOs, alerts, dashboards, tracing (owned by observability/*)
+│   ├── metrics-inventory.md
+│   ├── slos.md
+│   ├── alerts.md
+│   ├── dashboards.md
+│   ├── tracing.md
+│   └── synthetic-checks.md
+├── finops/                ← budgets and audits (owned by finops/*)
+│   ├── budgets.md
+│   ├── right-sizing-audits.md
+│   ├── idle-audits.md
+│   └── cost-attribution.md
 └── onboarding.md          ← getting-started doc (owned by onboarding-walkthrough)
 ```
 

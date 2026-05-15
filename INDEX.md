@@ -106,3 +106,29 @@ One-line catalog of every skill in this library.
 - [docker-cleanup](skills/dev-environment/docker-cleanup/SKILL.md) — Reclaim Docker disk safely; per-resource decision tree; never silently destroy data.
 - [worktree-cleanup](skills/dev-environment/worktree-cleanup/SKILL.md) — Find stale git worktrees and orphan branches; check for uncommitted work before removing.
 - [dependency-cache-cleanup](skills/dev-environment/dependency-cache-cleanup/SKILL.md) — Per-project (`node_modules`, `target`, `.venv`) and user-level caches; safety + recency scoring.
+
+## ai-engineering
+
+- [prompt-engineering](skills/ai-engineering/prompt-engineering/SKILL.md) — Prompts as code: structure, versioning, eval-gating; under `prompts/` with frontmatter.
+- [llm-evals](skills/ai-engineering/llm-evals/SKILL.md) — Golden sets, graders, regression gating; suites under `tests/evals/`.
+- [llm-cost-management](skills/ai-engineering/llm-cost-management/SKILL.md) — Visibility-first; prompt caching, routing, batch, context trimming. Living `docs/ai/cost-management.md`.
+- [hallucination-guardrails](skills/ai-engineering/hallucination-guardrails/SKILL.md) — Schema, grounding, refusal, verification; layered defense per feature.
+- [rag-design](skills/ai-engineering/rag-design/SKILL.md) — Chunking, hybrid retrieval, reranking, citation grounding, eval discipline.
+- [agent-design](skills/ai-engineering/agent-design/SKILL.md) — Justify the agent; design tools, control flow, safety scope, observability, evals.
+- [llm-safety](skills/ai-engineering/llm-safety/SKILL.md) — Prompt-injection defense, jailbreak resistance, scoped tool use, adversarial evals.
+
+## observability
+
+- [metrics-design](skills/observability/metrics-design/SKILL.md) — RED + USE + golden signals; metric inventory at `docs/observability/metrics-inventory.md`.
+- [slo-definition](skills/observability/slo-definition/SKILL.md) — SLI / SLO / error budget + policy that triggers on depletion.
+- [alerting-policy](skills/observability/alerting-policy/SKILL.md) — Three tiers (page / ticket / log); runbook-gated paging; symptom-based.
+- [dashboard-design](skills/observability/dashboard-design/SKILL.md) — Dashboards answer one question; service-health, funnel, capacity, cost.
+- [distributed-tracing](skills/observability/distributed-tracing/SKILL.md) — OTel, context propagation, sampling, log/metric linkage.
+- [synthetic-monitoring](skills/observability/synthetic-monitoring/SKILL.md) — Outside-in probes for uptime, journeys, contracts.
+
+## finops
+
+- [cloud-cost-budget](skills/finops/cloud-cost-budget/SKILL.md) — Per-service / team / feature budgets + alerts + response policy; `docs/finops/budgets.md`.
+- [resource-right-sizing](skills/finops/resource-right-sizing/SKILL.md) — Quarterly audit; downsize / change family / change tier with measured savings.
+- [idle-resource-audit](skills/finops/idle-resource-audit/SKILL.md) — Find unused resources (orphan volumes, idle instances, dormant LBs); safe staged decommission.
+- [cost-attribution](skills/finops/cost-attribution/SKILL.md) — Per-feature / per-customer / per-team showback; unit economics.

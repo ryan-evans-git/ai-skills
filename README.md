@@ -6,7 +6,7 @@ Designed so engineers, QA, and other AI agents all operate from the same playboo
 
 ## What's in here
 
-Skills are organized into thirteen categories:
+Skills are organized into sixteen categories:
 
 | Category | What it covers |
 | --- | --- |
@@ -23,6 +23,9 @@ Skills are organized into thirteen categories:
 | **cicd** | Pipeline design, branch protection, artifact promotion, release strategy, environment parity, flaky-test management |
 | **integration** | Service map, upstream-callers review, downstream-dependencies checklist, API contract evolution, contract tests |
 | **dev-environment** | Dev-machine disk audit, Docker cleanup, git worktree cleanup, dependency cache cleanup |
+| **ai-engineering** | Prompt engineering, LLM evals, cost management, hallucination guardrails, RAG, agents, LLM safety |
+| **observability** | Metrics design (RED/USE), SLO definition, alerting policy, dashboards, distributed tracing, synthetic monitoring |
+| **finops** | Cloud cost budgets, right-sizing, idle-resource audit, cost attribution |
 
 Browse the full catalog in [INDEX.md](INDEX.md).
 
@@ -78,7 +81,10 @@ docs/
 ├── performance/      ← perf budgets, investigations, load tests, DB tuning writeups
 ├── architecture/     ← (extended) twelve-factor audit, caching strategy, system diagrams
 ├── cicd/             ← pipeline design, branch protection, release strategy, env-parity matrix
-└── integration/      ← service map, API contract policy, contract tests
+├── integration/      ← service map, API contract policy, contract tests
+├── ai/               ← prompts, eval suites, cost management, RAG / agent / guardrail docs
+├── observability/    ← metrics inventory, SLOs, alerts, dashboards, tracing, synthetics
+└── finops/           ← budgets, right-sizing audits, idle-resource audits, cost attribution
 ```
 
 The **docs-directory-keeper** skill knows this layout and will create / maintain it.

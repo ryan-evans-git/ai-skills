@@ -119,6 +119,33 @@ docs/
 - **User-deletion** walks the deletion map at `docs/security/deletion-map.md` — primary store, derived data, caches, third parties, backups. (skill: right-to-delete)
 - **Audit logs** are separate from operational logs, append-only, with their own retention. Exempt from user-deletion. (skill: audit-log-retention)
 
+### AI / LLM defaults
+
+- **Prompts are code.** Versioned under `prompts/<name>.md` with frontmatter; eval-gated before merging. (skill: prompt-engineering)
+- **Every LLM feature has an eval suite** under `tests/evals/<feature>/`. Prompt or model changes run them. (skill: llm-evals)
+- **Cost visibility on day one** — every LLM call logged with feature/model/tokens/cost. Living `docs/ai/cost-management.md`. (skill: llm-cost-management)
+- **Prompt caching enabled by default** for any Anthropic-API integration. Stable prefixes first, dynamic content last.
+- **Structured output + refusal + confidence** in every user-facing LLM schema. (skill: hallucination-guardrails)
+- **Agents only when justified** — single-completion + retrieval is the default; agents add cost, latency, and debug surface. (skill: agent-design)
+- **Adversarial evals** for any user-facing LLM feature: prompt injection, jailbreak, exfiltration. (skill: llm-safety)
+- **RAG citations are verifiable** — quote-match against retrieved chunks; reject if not in context. (skill: rag-design)
+
+### Observability defaults
+
+- **RED + USE + golden signals** as the metric baseline; inventory at `docs/observability/metrics-inventory.md`. (skill: metrics-design)
+- **SLOs anchored to user-visible journeys**, with an explicit error-budget policy at `docs/observability/slos.md`. (skill: slo-definition)
+- **Alerts in three tiers** (page / ticket / log); pageable alerts require a runbook. (skill: alerting-policy)
+- **Dashboards answer questions**, not "all metrics." Canonical service-health + funnel dashboards per service. (skill: dashboard-design)
+- **OpenTelemetry tracing**, with `trace_id` injected into every log line. (skill: distributed-tracing)
+- **Synthetic probes** from multiple regions for any user-facing service. (skill: synthetic-monitoring)
+
+### FinOps defaults
+
+- **Required tags on every resource** (`environment`, `service`, `team`, `cost-center`); enforced via policy.
+- **Budgets at multiple levels** (account, service, team, feature) with forecast-based alerts. Living `docs/finops/budgets.md`. (skill: cloud-cost-budget)
+- **Quarterly right-sizing audit** + monthly idle-resource audit. (skills: resource-right-sizing, idle-resource-audit)
+- **Per-feature / per-customer attribution** instrumented; reports at `docs/finops/cost-attribution.md`. (skill: cost-attribution)
+
 ### Enforcement hooks (if wired into this project's `.claude/settings.json`)
 
 - `require_plan.py` — blocks edits to source files when `docs/plans/CURRENT.md` is missing or stale.
