@@ -6,7 +6,7 @@ Designed so engineers, QA, and other AI agents all operate from the same playboo
 
 ## What's in here
 
-Skills are organized into sixteen categories:
+Skills are organized into seventeen categories:
 
 | Category | What it covers |
 | --- | --- |
@@ -26,6 +26,7 @@ Skills are organized into sixteen categories:
 | **ai-engineering** | Prompt engineering, LLM evals, cost management, hallucination guardrails, RAG, agents, LLM safety |
 | **observability** | Metrics design (RED/USE), SLO definition, alerting policy, dashboards, distributed tracing, synthetic monitoring |
 | **finops** | Cloud cost budgets, right-sizing, idle-resource audit, cost attribution |
+| **frontend** | Distinctive UI design, accessibility, design system, Core Web Vitals, component architecture, forms, responsive, browser automation, microcopy, async states, visual regression, dialogs, i18n, rendering strategy |
 
 Browse the full catalog in [INDEX.md](INDEX.md).
 
@@ -140,7 +141,8 @@ docs/
 ├── integration/      ← service map, API contract policy, contract tests
 ├── ai/               ← prompts, eval suites, cost management, RAG / agent / guardrail docs
 ├── observability/    ← metrics inventory, SLOs, alerts, dashboards, tracing, synthetics
-└── finops/           ← budgets, right-sizing audits, idle-resource audits, cost attribution
+├── finops/           ← budgets, right-sizing audits, idle-resource audits, cost attribution
+└── frontend/         ← design system, a11y audits, web-vitals, voice + tone, async patterns, i18n, rendering strategy
 ```
 
 The **docs-directory-keeper** skill knows this layout and will create / maintain it.

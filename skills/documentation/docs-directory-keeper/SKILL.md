@@ -82,6 +82,20 @@ docs/
 │   ├── right-sizing-audits.md
 │   ├── idle-audits.md
 │   └── cost-attribution.md
+├── frontend/              ← design system, a11y, web-vitals, voice, async patterns, i18n, rendering (owned by frontend/*)
+│   ├── design-system.md
+│   ├── design-rationale.md
+│   ├── a11y-audit-*.md
+│   ├── web-vitals.md
+│   ├── voice-tone.md
+│   ├── async-patterns.md
+│   ├── responsive.md
+│   ├── visual-regression.md
+│   ├── i18n.md
+│   ├── rendering-strategy.md
+│   ├── component-patterns.md
+│   ├── forms/
+│   └── browser-automation/
 └── onboarding.md          ← getting-started doc (owned by onboarding-walkthrough)
 ```
 

@@ -167,6 +167,22 @@ docs/
 - **Quarterly right-sizing audit** + monthly idle-resource audit. (skills: resource-right-sizing, idle-resource-audit)
 - **Per-feature / per-customer attribution** instrumented; reports at `docs/finops/cost-attribution.md`. (skill: cost-attribution)
 
+### Frontend defaults
+
+- **Design with intent.** Avoid the generic AI aesthetic; build a real palette + type hierarchy + spacing. (skill: frontend-design)
+- **Design system anchored on tokens** — `docs/frontend/design-system.md` is the source of truth; Storybook + visual regression keep it honest. (skills: design-system-keeper, visual-regression-testing)
+- **Accessibility is required, not a bonus.** WCAG 2.1/2.2 AA at minimum; audit before launch. (skill: a11y-audit)
+- **Core Web Vitals budgeted + enforced** — LCP < 2.5s, INP < 200ms, CLS < 0.1 at p75. Lighthouse CI on critical routes. (skill: core-web-vitals)
+- **Forms use real labels** (not placeholders), specific error messages, hybrid validation timing, autocomplete attributes. (skill: form-design)
+- **Component APIs lean toward composition over configuration** — primitives first, headless second, styled third. (skill: component-architecture)
+- **Responsive everywhere** — fluid type with `clamp()`, container queries for components, viewport queries only for top-level layout. (skill: responsive-design)
+- **Microcopy is design** — buttons say what happens, errors are specific + blameless, empty states have a next step. (skill: ui-copy)
+- **Every async UI handles four states** — idle, loading, success, error — explicitly. (skill: loading-and-error-states)
+- **Dialogs follow WAI-ARIA**: focus trap, scroll lock, ESC, focus restoration. Use a vetted headless library. (skill: modal-and-dialog-design)
+- **i18n-ready by default** — no hardcoded strings, no concatenation, ICU MessageFormat for plurals. (skill: internationalization-prep)
+- **Rendering strategy decided per route**, not picked once globally. (skill: rendering-strategy)
+- **Browser automation respects rate limits + robots.txt + ToS.** (skill: browser-use)
+
 ### Enforcement hooks (if wired into this project's `.claude/settings.json`)
 
 - `require_plan.py` — blocks edits to source files when `docs/plans/CURRENT.md` is missing or stale.

@@ -134,3 +134,20 @@ One-line catalog of every skill in this library.
 - [resource-right-sizing](skills/finops/resource-right-sizing/SKILL.md) — Quarterly audit; downsize / change family / change tier with measured savings.
 - [idle-resource-audit](skills/finops/idle-resource-audit/SKILL.md) — Find unused resources (orphan volumes, idle instances, dormant LBs); safe staged decommission.
 - [cost-attribution](skills/finops/cost-attribution/SKILL.md) — Per-feature / per-customer / per-team showback; unit economics.
+
+## frontend
+
+- [frontend-design](skills/frontend/frontend-design/SKILL.md) — Anchor skill. Permission + patterns for distinctive, production-grade interfaces that avoid generic AI aesthetics.
+- [a11y-audit](skills/frontend/a11y-audit/SKILL.md) — WCAG 2.1/2.2 AA audit with automated + keyboard + screen-reader layers; findings under `docs/frontend/a11y-audit-*.md`.
+- [design-system-keeper](skills/frontend/design-system-keeper/SKILL.md) — Tokens (color, type, spacing, motion, radii, shadows) + component primitives + Storybook discipline. Living `docs/frontend/design-system.md`.
+- [core-web-vitals](skills/frontend/core-web-vitals/SKILL.md) — LCP / INP / CLS optimization plus images / fonts / bundle hygiene. Living `docs/frontend/web-vitals.md`.
+- [component-architecture](skills/frontend/component-architecture/SKILL.md) — Prop API design, composition over configuration, controlled vs. uncontrolled, compound components.
+- [form-design](skills/frontend/form-design/SKILL.md) — Field design, validation timing, error UX, multi-step, autocomplete + autofill, accessibility.
+- [responsive-design](skills/frontend/responsive-design/SKILL.md) — Breakpoint strategy, container queries, fluid type, touch targets, mobile-first defaults.
+- [browser-use](skills/frontend/browser-use/SKILL.md) — Playwright / Puppeteer / CDP for testing, scraping, agent workflows; safety rails (rate limit, robots, headless detection, consent).
+- [ui-copy](skills/frontend/ui-copy/SKILL.md) — Microcopy: buttons, errors, empty states, confirmations, voice + tone.
+- [loading-and-error-states](skills/frontend/loading-and-error-states/SKILL.md) — Skeletons, spinners, optimistic UI, error boundaries, retry, partial-failure patterns.
+- [visual-regression-testing](skills/frontend/visual-regression-testing/SKILL.md) — Chromatic / Percy / Playwright Visual; baseline workflow; dynamic-content masking.
+- [modal-and-dialog-design](skills/frontend/modal-and-dialog-design/SKILL.md) — WAI-ARIA dialog pattern + focus trap + scroll lock + route-awareness + mobile patterns.
+- [internationalization-prep](skills/frontend/internationalization-prep/SKILL.md) — String extraction, ICU MessageFormat, RTL, locale-aware formatting, font fallbacks.
+- [rendering-strategy](skills/frontend/rendering-strategy/SKILL.md) — Per-route SSG/ISR/SSR/CSR/streaming/edge decision; `docs/frontend/rendering-strategy.md`.
