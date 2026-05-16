@@ -85,6 +85,17 @@ git clone https://github.com/ryan-evans-git/ai-skills.git ~/code/ai-skills
 
 `install.sh` symlinks each skill into `~/.claude/skills/` AND each subagent into `~/.claude/agents/` so Claude picks them up everywhere.
 
+### Installing for OpenAI Codex instead (or alongside)
+
+```sh
+~/code/ai-skills/install-codex.sh                  # ~/.codex/prompts/
+~/code/ai-skills/install-codex.sh --emit-agents-md # AGENTS.md from the template
+```
+
+`install-codex.sh` symlinks the skills as Codex slash-command prompts. Note: Codex invokes prompts explicitly (`/<name>`) — it does *not* auto-trigger on description match the way Claude Code does. Subagents and hooks don't have direct Codex equivalents. See [`docs/codex-install.md`](docs/codex-install.md) for the full translation table.
+
+You can run both installers; the skills are one source of truth, each install just creates a different "view" of them.
+
 ### Project-scoped install (so QA, other devs, and CI agents pick them up automatically)
 
 From inside a project repo:
